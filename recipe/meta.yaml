@@ -47,7 +47,6 @@ requirements:
     - {{ pin_compatible('numpy') }}
     - dataclasses
     - hydra-core
-    -
 
 test:
   # imports:
