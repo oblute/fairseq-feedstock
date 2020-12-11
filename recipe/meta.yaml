@@ -1,5 +1,5 @@
 {% set name = "fairseq" %}
-{% set version = "0.9.0" %}
+{% set version = "0.10.1" %}
 
 
 package:
@@ -8,17 +8,19 @@ package:
 
 source:
   url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
-  sha256: 61206358b79f325ea0b46cfd8c95cdb81bfbcfb43cf12b47d1d5124ce7321d3b
+  sha256: 05b9e6bea4fc974b33e0ee5c154ec4069c6996be30c53d3ea8dd6d13113170f2
 
 build:
   number: 0
   entry_points:
     - fairseq-eval-lm = fairseq_cli.eval_lm:cli_main
     - fairseq-generate = fairseq_cli.generate:cli_main
+    - fairseq-hydra-train = fairseq_cli.hydra_train:cli_main
     - fairseq-interactive = fairseq_cli.interactive:cli_main
     - fairseq-preprocess = fairseq_cli.preprocess:cli_main
     - fairseq-score = fairseq_cli.score:main
     - fairseq-train = fairseq_cli.train:cli_main
+    - fairseq-validate = fairseq_cli.validate:cli_main
   script: {{ PYTHON }} -m pip install . -vv
 
 requirements:
@@ -31,22 +33,26 @@ requirements:
     - cython
     - setuptools
     - pycparser
-
+    - numpy
   run:
     - python
     - cffi
     - numpy
     - regex
-    - sacrebleu
+    - sacrebleu >=1.4.12
     - pycparser
     - cython
     - pytorch
     - tqdm
+    - {{ pin_compatible('numpy') }}
+    - dataclasses
+    - hydra-core
+    -
 
 test:
-  imports:
-    - examples
-    - examples.noisychannel
+  # imports:
+  #   - examples
+  #   - examples.noisychannel
   commands:
     - fairseq-eval-lm --help
     - fairseq-generate --help
