@@ -44,7 +44,7 @@ requirements:
     - pytorch
     - tqdm
     - {{ pin_compatible('numpy') }}
-    - dataclasses
+    - dataclasses  # [py36]
     - hydra-core
 
 test:
