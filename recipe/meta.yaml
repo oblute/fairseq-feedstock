@@ -31,13 +31,12 @@ requirements:
     - pip
     - pytorch
     - cython
-    - setuptools
+    - setuptools >=18.0
     - pycparser
     - numpy
   run:
     - python
     - cffi
-    - numpy
     - regex
     - sacrebleu >=1.4.12
     - pycparser
@@ -49,9 +48,6 @@ requirements:
     - hydra-core
 
 test:
-  # imports:
-  #   - examples
-  #   - examples.noisychannel
   commands:
     - fairseq-eval-lm --help
     - fairseq-generate --help
